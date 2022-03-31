@@ -1,5 +1,5 @@
 const data = {
-  product: [
+  products: [
     {
       name: 'Nike Air Max: Unlimited Edition',
       slug: 'nike-air-max-unlimited-edition',
@@ -38,7 +38,7 @@ const data = {
     },
     {
       name: 'Adidas Stan Smith : Corea Edition',
-      slug: 'adidas-stan-smith-corea-edition',
+      slug: 'adidas-stan-smith-corea2-edition',
       category: 'Shoes',
       image: '/images/p2.webp',
       price: 190,

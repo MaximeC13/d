@@ -1,0 +1,75 @@
+function Rating(props) {
+  const { rating, numReviews } = props;
+
+  console.log(props, 'okokokok');
+  return (
+    <div className="rating">
+      <span>
+        <i
+          className={
+            rating >= 1
+              ? 'fas fa-star'
+              : rating >= 0.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          }
+        />
+      </span>
+      <span>
+        <i
+          className={
+            rating >= 2
+              ? 'fas fa-star'
+              : rating >= 1.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          }
+        />
+      </span>
+      <span>
+        <i
+          className={
+            rating >= 3
+              ? 'fas fa-star'
+              : rating >= 2.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          }
+        />
+      </span>
+      <span>
+        <i
+          className={
+            rating >= 4
+              ? 'fas fa-star'
+              : rating >= 3.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          }
+        />
+      </span>
+      <span>
+        <i
+          className={
+            rating >= 5
+              ? 'fas fa-star'
+              : rating >= 4.5
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
+          }
+        />
+      </span>
+      <span
+        className={
+          numReviews === 1
+            ? `${numReviews} + " note"`
+            : { numReviews } + ' notes'
+        }
+      />
+      &nbsp;
+      {numReviews === 1 && <span>{numReviews} note</span>}
+      {numReviews >= 2 && <span>{numReviews} notes</span>}
+    </div>
+  );
+}
+export default Rating;
