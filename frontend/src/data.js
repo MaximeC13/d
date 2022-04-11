@@ -1,6 +1,7 @@
 const data = {
   product: [
     {
+      _id: '1',
       name: 'Nike Air Max: Unlimited Edition',
       slug: 'nike-air-max-unlimited-edition',
       category: 'Shoes',
@@ -13,6 +14,7 @@ const data = {
       description: 'Medium Quality ',
     },
     {
+      _id: '2',
       name: 'Nike Air Max: limited Edition',
       slug: 'nike-air-max-limited-edition',
       category: 'Shoes',
@@ -30,7 +32,7 @@ const data = {
       category: 'Shoes',
       image: '/images/p2.webp',
       price: 190,
-      countInStock: 9,
+      countInStock: 0,
       brand: 'Nike',
       rating: 3.5,
       numReview: 1,
@@ -42,7 +44,7 @@ const data = {
       category: 'Shoes',
       image: '/images/p2.webp',
       price: 190,
-      countInStock: 9,
+      countInStock: 0,
       brand: 'Nike',
       rating: 3.5,
       numReview: 1,
