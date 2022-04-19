@@ -23,6 +23,7 @@ main {
 .rating span {
   color: #ffc000;
 }
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -49,4 +50,10 @@ main {
 
 .img-thumbnail {
   height: 80px;
+}
+
+.card-img-top {
+  min-width: 100%;
+  max-height: 300px;
+  min-height: 300px;
 }

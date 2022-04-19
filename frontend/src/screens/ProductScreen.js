@@ -1,17 +1,16 @@
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import logger from 'use-reducer-logger';
+import { useContext, useEffect, useReducer } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Rating from '../components/Rating';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
-import { Helmet } from 'react-helmet-async';
 import Button from 'react-bootstrap/Button';
+import Rating from '../components/Rating';
+import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
-import Messagebox from '../components/MessageBox';
+import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store';
 
@@ -33,12 +32,11 @@ function ProductScreen() {
   const params = useParams();
   const { slug } = params;
 
-  const [{ loading, error, product }, dispatch] = useReducer(logger(reducer), {
+  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
     error: '',
   });
-  // const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -55,11 +53,11 @@ function ProductScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
-    const existItem = cart.cartItems.find((x) => x.id === product._id);
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
-      window.alert("Désolé , le produit n'est plus en stock");
+      window.alert('Sorry. Product is out of stock');
       return;
     }
     ctxDispatch({
@@ -68,11 +66,10 @@ function ProductScreen() {
     });
     navigate('/cart');
   };
-
   return loading ? (
     <LoadingBox />
   ) : error ? (
-    <Messagebox variant="danger">{error}</Messagebox>
+    <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div>
       <Row>
@@ -89,67 +86,59 @@ function ProductScreen() {
               <Helmet>
                 <title>{product.name}</title>
               </Helmet>
-              <Row>
-                <Col>
-                  <h1>{product.name}</h1>
-                </Col>
-              </Row>
+              <h1>{product.name}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Row>
-                <Col>
-                  <Rating
-                    rating={product.rating}
-                    numReviews={product.numReview}
-                  ></Rating>
-                </Col>
-              </Row>
+              <Rating
+                rating={product.rating}
+                numReviews={product.numReviews}
+              ></Rating>
             </ListGroup.Item>
+            <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
-              <Row>
-                <Col>
-                  <strong>Prix : {product.price} € </strong>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Row>
-                <strong>Description:</strong>
-                <p>{product.description}</p>
-              </Row>
+              Description:
+              <p>{product.description}</p>
             </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
-          <Card.Body>
-            <ListGroup.Item>
-              <Row>
-                <strong>Prix : {product.price} €</strong>
-              </Row>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <strong>Disponibilité :&nbsp;&nbsp;&nbsp;</strong>
-              {product.countInStock > 0 ? (
-                <Badge bg="success">En stock</Badge>
-              ) : (
-                <Badge bg="danger">Indisponible</Badge>
-              )}
-            </ListGroup.Item>
+          <Card>
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Price:</Col>
+                    <Col>${product.price}</Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Status:</Col>
+                    <Col>
+                      {product.countInStock > 0 ? (
+                        <Badge bg="success">In Stock</Badge>
+                      ) : (
+                        <Badge bg="danger">Unavailable</Badge>
+                      )}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
 
-            {product.countInStock > 0 && (
-              <ListGroup.Item>
-                <div className="d-grid">
-                  <Button onClick={addToCartHandler} variant="primary">
-                    Ajouter au panier
-                  </Button>
-                </div>
-              </ListGroup.Item>
-            )}
-          </Card.Body>
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <div className="d-grid">
+                      <Button onClick={addToCartHandler} variant="primary">
+                        Add to Cart
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                )}
+              </ListGroup>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </div>
   );
 }
-
 export default ProductScreen;

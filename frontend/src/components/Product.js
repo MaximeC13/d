@@ -5,6 +5,7 @@ import Rating from './Rating';
 
 function Product(props) {
   const { product } = props;
+  const newProduct = String(product.name).length;
   return (
     <Card>
       <Link to={`product/${product.slug}`}>
@@ -12,11 +13,23 @@ function Product(props) {
       </Link>
       <Card.Body>
         <Link to={`product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+          {newProduct >= 30 ? (
+            <Card.Title>{product.name}</Card.Title>
+          ) : (
+            <Card.Title>
+              {product.name}
+              <br />
+              <br />
+            </Card.Title>
+          )}
         </Link>
         <Rating rating={product.rating} numReviews={product.numReview} />
         <Card.Text>{product.price} €</Card.Text>
-        <Button>Ajouter au panier</Button>
+        <div className="text-center">
+          <Link to={`product/${product.slug}`}>
+            <Button className="text-center">Voir l'article</Button>
+          </Link>
+        </div>{' '}
       </Card.Body>
     </Card>
   );

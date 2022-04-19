@@ -27,6 +27,7 @@ const data = {
       description: 'High quality shoes',
     },
     {
+      _id: '3',
       name: 'Adidas Stan Smith : Corea Edition',
       slug: 'adidas-stan-smith-corea-edition',
       category: 'Shoes',
@@ -39,6 +40,7 @@ const data = {
       description: "Shoes for hypster i doesn't want this in my house",
     },
     {
+      _id: '4',
       name: 'Adidas Stan Smith : Corea2 Edition',
       slug: 'adidas-stan-smith-corea-2-edition',
       category: 'Shoes',

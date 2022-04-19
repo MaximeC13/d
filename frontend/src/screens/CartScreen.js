@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import Messagebox from '../components/MessageBox';
 import { Store } from '../Store';
+import { Helmet } from 'react-helmet-async';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import MessageBox from '../components/MessageBox';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 export default function CartScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -17,15 +18,15 @@ export default function CartScreen() {
   return (
     <div>
       <Helmet>
-        <title>Votre panier :</title>
+        <title>Shopping Cart</title>
       </Helmet>
-      <h1>Votre Panier</h1>
+      <h1>Shopping Cart</h1>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
-            <Messagebox>
-              Votre panier est vide. <Link to="/">Retourner sur le shop.</Link>
-            </Messagebox>
+            <MessageBox>
+              Cart is empty. <Link to="/">Go Shopping</Link>
+            </MessageBox>
           ) : (
             <ListGroup>
               {cartItems.map((item) => (
@@ -35,18 +36,19 @@ export default function CartScreen() {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="img-fluid rounded img-thubnail"
-                      ></img>
-                      {''}
+                        className="img-fluid rounded img-thumbnail"
+                      ></img>{' '}
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
                       <Button variant="light" disabled={item.quantity === 1}>
                         <i className="fas fa-minus-circle"></i>
-                      </Button>
-                      {''}
+                      </Button>{' '}
                       <span>{item.quantity}</span>{' '}
-                      <Button variant="light" disabled={item.quantity === 1}>
+                      <Button
+                        variant="light"
+                        disabled={item.quantity === item.countInStock}
+                      >
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
@@ -62,7 +64,32 @@ export default function CartScreen() {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <h3>
+                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                    items) : $
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                  </h3>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <div className="d-grid">
+                    <Button
+                      type="button"
+                      variant="primary"
+                      disabled={cartItems.length === 0}
+                    >
+                      Proceed to Checkout
+                    </Button>
+                  </div>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </div>
   );

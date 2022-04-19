@@ -23,3 +23,11 @@
 12. Complete Add to Cart
 13. Check exist item in the cart
 14. Check count in stock in backend
+15. Create Cart Screen
+16. Create 2 columns
+17. Display List Items
+18. Create action column
+19. Complete Cart Screen
+20. Click handler for inc/dec item
+21. Click handler for remove item
+22. Click handler for checkout

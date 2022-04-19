@@ -7,7 +7,7 @@ const data = {
       category: 'Shoes',
       image: '/images/p1.webp',
       price: 120,
-      countInStock: 10,
+      countInStock: 0,
       brand: 'Nike',
       rating: 4.5,
       numReview: 10,
