@@ -31,3 +31,11 @@
 20. Click handler for inc/dec item
 21. Click handler for remove item
 22. Click handler for checkout
+23. Create Cart Screen
+24. Create 2 columns
+25. Display items list
+26. Create action column
+27. Complete Cart Screen
+28. Click handler for inc/dec item
+29. Click handler for remove item
+30. Click handler for checkout

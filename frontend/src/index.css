@@ -12,10 +12,6 @@ body {
   color: #404040;
 }
 
-.site-container {
-  min-height: 100vh;
-}
-
 main {
   flex: 1;
 }
@@ -56,4 +52,12 @@ main {
   min-width: 100%;
   max-height: 300px;
   min-height: 300px;
+}
+
+.site-container {
+  min-height: 100vh;
+}
+
+.small-container {
+  max-width: 600px;
 }
